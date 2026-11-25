@@ -1,3 +1,5 @@
+dados_dir <- Sys.getenv("EXEMPLOS_R_DADOS", unset = if (dir.exists("Doc")) "Doc" else file.path("..", "Doc"))
+
 ##################################
 ###      AGRUPAR VALORES       ###
 ##################################
@@ -14,10 +16,17 @@ library(stringr)
 
 
 # BUSCAR DIRETÓRIO (PASTA COM OS ARQUIVOS)
-setwd("F:/Documentos/R/UDEMY")
 
 # Arquivo excel
-df <- read_xlsx("país_continente.xlsx")
+arquivo <- file.path(dados_dir, "país_continente.xlsx")
+df <- if (file.exists(arquivo)) {
+    read_xlsx(arquivo)
+} else {
+    # Dados fictícios para demonstrar o exercício.
+    data.frame(País = c("Brasil", "Argentina", "Portugal", "Portugal"),
+    Capital = c("Brasília", "Buenos Aires", "Lisboa", "Lisboa"),
+    Continente = c("América do Sul", "América do Sul", "Europa", "Europa"))
+}
 View(df)
 
 

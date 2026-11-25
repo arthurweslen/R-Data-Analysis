@@ -1,3 +1,5 @@
+dados_dir <- Sys.getenv("EXEMPLOS_R_DADOS", unset = if (dir.exists("Doc")) "Doc" else file.path("..", "Doc"))
+
 ##################################
 ###       ORDENAR COLUNAS      ###
 ##################################
@@ -11,10 +13,15 @@ library(dplyr)
 library(readxl)
 
 # BUSCAR DIRETÓRIO (PASTA COM OS ARQUIVOS)
-setwd("F:/Documentos/R/UDEMY")
 
 # Arquivo excel
-df <- read_xlsx("ordenar.xlsx")
+arquivo <- file.path(dados_dir, "ordenar.xlsx")
+df <- if (file.exists(arquivo)) {
+    read_xlsx(arquivo)
+} else {
+    # Dados fictícios para demonstrar o exercício.
+    data.frame(Nome = c("Bruna", "Ana", "Ana", "Carlos"), Idade = c(27, 31, 23, 35))
+}
 View(df)
 
 #Ordenar uma coluna ascendente
