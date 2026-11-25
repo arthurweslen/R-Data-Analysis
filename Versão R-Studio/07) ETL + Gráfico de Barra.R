@@ -1,3 +1,5 @@
+dados_dir <- Sys.getenv("EXEMPLOS_R_DADOS", unset = if (dir.exists("Doc")) "Doc" else file.path("..", "Doc"))
+
 ####################################
 ###    ETL + GRÁFICO DE BARRA    ###
 ####################################
@@ -12,10 +14,9 @@ library(plotly)
 
 
 # BUSCAR DIRETÓRIO (PASTA COM OS ARQUIVOS)
-setwd("F:/Documentos/R/UDEMY/Gráfico")
 
 # ABRIR ARQUIVO
-srag_sp <- read.csv('SRAG_2020.csv', sep = ";")
+srag_sp <- read.csv(file.path(dados_dir, "SRAG_2020.csv"), sep = ";")
 View(srag_sp)
 
 # EXCLUIR COLUNAS POR INTERVALO

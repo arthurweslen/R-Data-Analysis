@@ -1,3 +1,5 @@
+dados_dir <- Sys.getenv("EXEMPLOS_R_DADOS", unset = if (dir.exists("Doc")) "Doc" else file.path("..", "Doc"))
+
 ##################################
 ###     SUBSTITUIR VALORES     ###
 ##################################
@@ -13,11 +15,19 @@ library(readxl)
 library(stringr)
 
 # BUSCAR DIRETÓRIO (PASTA COM OS ARQUIVOS)
-setwd("F:/Documentos/R/UDEMY")
 
 
 # Arquivo excel
-df <- read_xlsx("substituir_valores.xlsx")
+arquivo <- file.path(dados_dir, "substituir_valores.xlsx")
+df <- if (file.exists(arquivo)) {
+    read_xlsx(arquivo)
+} else {
+    # Dados fictícios para demonstrar o exercício.
+    data.frame(Estado = c("SP.year:2022", "INVÁLIDO", "RJ"),
+    Ticket = c("T1.year:2022", "T2", "T3"), COD_ = c("A.year:2022", "B", "C"),
+    Sexo = c("Feminino.year:2022", "Masculino", "Feminino"), Idade = c("#23", "31", "26"),
+    Salário = c(1700, 2400, 2100))
+}
 View(df)
 
 

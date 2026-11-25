@@ -1,3 +1,5 @@
+dados_dir <- Sys.getenv("EXEMPLOS_R_DADOS", unset = if (dir.exists("Doc")) "Doc" else file.path("..", "Doc"))
+
 ##################################
 ###   CRIAR/EXCLUIR COLUNAS    ###
 ##################################
@@ -11,10 +13,9 @@ library(dplyr)
 library(readxl)
 
 # BUSCAR DIRET?RIO (PASTA COM OS ARQUIVOS)
-setwd("F:/Documentos/R/UDEMY")
 
 
-df <- read_xlsx("Numeros.xlsx")
+df <- read_xlsx(file.path(dados_dir, "Numeros.xlsx"))
 View(df)
 
 # Criar coluna Soma
